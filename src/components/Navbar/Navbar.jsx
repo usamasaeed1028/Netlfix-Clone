@@ -30,7 +30,7 @@ const Navbar = () => {
   }
   return (
     <div
-      className={` ${colorChange ? "bg-[rgba(0,0,0,0.5)] fixed" : ""}
+      className={` ${colorChange ? "bg-[black] fixed" : ""}
     w-full px-[30px] py-[10px] text-white`}
     >
       <div className="flex items-center justify-between">
