@@ -1,19 +1,17 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Login from './pages/Login'
-import Netflix from './pages/Netflix'
-import Player from './pages/Player'
-import SignUp from './pages/SignUp'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
-    <Routes>
-      <Route exact path="/login" element={<Login />}></Route>
-      <Route exact path="/signup" element={<SignUp />}></Route>
-      <Route exact path="/player" element={<Player />}></Route>
-      <Route exact path="/" element={<Netflix />}></Route>
-    </Routes>
-  )
-}
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+      </Routes>
+    </>
+  );
+};
 
-export default App
+export default App;
