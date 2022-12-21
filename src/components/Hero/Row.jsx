@@ -20,12 +20,12 @@ const Row = ({ title, fetchUrl }) => {
 
   const slideLeft = () => {
     const slider = document.getElementById("slider");
-    slider.scrollLeft = scrollLeft - 500;
+    // slider.scrollLeft = scrollLeft - 500;
   }
 
   const slideRight = () => {
     const slider = document.getElementById("slider");
-    slider.scrollLeft = scrollLeft + 500;
+    // slider.scrollLeft = scrollLeft + 500;
   }
 
   return (
