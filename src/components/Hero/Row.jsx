@@ -3,10 +3,36 @@ import React, { useState } from "react";
 import { FaHeart, FaRegHeart} from "react-icons/fa";
 import { MdChevronLeft, MdChevronRight} from "react-icons/md";
 import { useEffect } from "react";
+import { db } from "../../utils/firebase-config";
+import { updateDoc,doc, arrayUnion } from "firebase/firestore";
+import { UserAuth } from "../../context/AuthContext";
 
 const Row = ({ title, fetchUrl }) => {
   const [movies, setMovies] = useState([]);
   const [like, setLike] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const {user} = UserAuth();
+
+  const movieId = doc(db,'users', `${user?.email}`);
+
+  const saveShow = async (item) => {
+      if(user?.email) {
+        setLike(true)
+        setSaved(true)
+        await updateDoc(movieId, {
+          savedShow: arrayUnion({
+            id: item.id,
+            title: item.title,
+            img: item.backdrop_path
+          })
+        })
+
+      }
+      else {
+        alert('Please login to save the movie');
+      }
+
+  }
 
   useEffect(() => {
     axios.get(fetchUrl).then((response) => {
@@ -14,9 +40,7 @@ const Row = ({ title, fetchUrl }) => {
     });
   }, []);
 
-  const handleLike = (id) => {
-    setLike(!like);
-  }
+
 
   const slideLeft = () => {
     const slider = document.getElementById("slider");
@@ -52,7 +76,7 @@ const Row = ({ title, fetchUrl }) => {
                   <p className="text-white whitespace-normal text-sm ">
                     {movie?.title.substring(0, 18)}
                   </p>
-                  <div className="absolute top-[10px] left-[10px]" onClick={() => handleLike(id)}>
+                  <div className="absolute top-[10px] left-[10px]" onClick={() => saveShow(movie)}>
                   {like? <FaHeart />: <FaRegHeart />}
                 </div>
                 </div>
