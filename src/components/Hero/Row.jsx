@@ -17,7 +17,7 @@ const Row = ({ title, fetchUrl }) => {
 
   const saveShow = async (item) => {
       if(user?.email) {
-        setLike(true)
+        setLike(!like)
         setSaved(true)
         await updateDoc(movieId, {
           savedShow: arrayUnion({
@@ -41,16 +41,14 @@ const Row = ({ title, fetchUrl }) => {
   }, []);
 
 
-
   const slideLeft = () => {
-    const slider = document.getElementById("slider");
-    // slider.scrollLeft = scrollLeft - 500;
-  }
-
+    var slider = document.getElementById('slider');
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
   const slideRight = () => {
-    const slider = document.getElementById("slider");
-    // slider.scrollLeft = scrollLeft + 500;
-  }
+    var slider = document.getElementById('slider');
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
 
   return (
     <div className="p-4">
